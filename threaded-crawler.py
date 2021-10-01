@@ -10,26 +10,6 @@ from time import time
 from threading import Thread
 from HTMLParser import HTMLParser
 
-class database:
-	def __init__(self):
-
-		self.db = MySQLdb.connect('localhost','user_name','password','database_name')
-	def getData(self,table):
-		c = self.db.cursor()
-		c.execute("SELECT * FROM `python_data`")
-
-		data = c.fetchall()
-		for row in data:
-			print(row[1])
-
-	def insertData(self,table,data):
-		c = self.db.cursor()
-		for thisData in data:
-			sql = """INSERT INTO `python_data` (`data`) VALUES (%s)"""
-			params = [thisData]
-			c.execute(sql,params)
-			self.db.commit()
-   			print(c._last_executed)
 class urlClass:
 	def __init__(self, url = ''):
 		self.url = url
@@ -40,8 +20,7 @@ class urlClass:
 		self.content = ''
 
 
-class linkExtractor(HTMLParser):
-	
+class linkExtractor(HTMLParser):	
 	def __init__(self):
 		HTMLParser.__init__(self)
 		self.links = []
